@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="invoiceDesingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblBody">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ScomeNo" Type="smallint" Nullable="false" />
+          <Property Name="Left" Type="numeric" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Top" Type="numeric" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblHeader">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ScomeNo" Type="smallint" Nullable="false" />
+          <Property Name="Left" Type="numeric" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Top" Type="numeric" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblScomeName">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tblBody_tblScomeName">
+          <End Role="tblScomeName" Type="Self.tblScomeName" Multiplicity="1" />
+          <End Role="tblBody" Type="Self.tblBody" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblScomeName">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="tblBody">
+              <PropertyRef Name="ScomeNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblHeader_tblScomeName">
+          <End Role="tblScomeName" Type="Self.tblScomeName" Multiplicity="1" />
+          <End Role="tblHeader" Type="Self.tblHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblScomeName">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="tblHeader">
+              <PropertyRef Name="ScomeNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="invoiceDesingModelStoreContainer">
+          <EntitySet Name="tblBody" EntityType="Self.tblBody" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblHeader" EntityType="Self.tblHeader" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblScomeName" EntityType="Self.tblScomeName" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblBody_tblScomeName" Association="Self.FK_tblBody_tblScomeName">
+            <End Role="tblScomeName" EntitySet="tblScomeName" />
+            <End Role="tblBody" EntitySet="tblBody" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblHeader_tblScomeName" Association="Self.FK_tblHeader_tblScomeName">
+            <End Role="tblScomeName" EntitySet="tblScomeName" />
+            <End Role="tblHeader" EntitySet="tblHeader" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="invoiceDesingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblBody">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Left" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Top" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="ScomeNo" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="tblScomeName" Relationship="invoiceDesingModel.FK_tblBody_tblScomeName" FromRole="tblBody" ToRole="tblScomeName" />
+        </EntityType>
+        <EntityType Name="tblHeader">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Left" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Top" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="ScomeNo" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="tblScomeName" Relationship="invoiceDesingModel.FK_tblHeader_tblScomeName" FromRole="tblHeader" ToRole="tblScomeName" />
+        </EntityType>
+        <EntityContainer Name="DataModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblBody" EntityType="Self.tblBody" />
+          <EntitySet Name="tblHeader" EntityType="Self.tblHeader" />
+          <EntitySet Name="tblScomeName" EntityType="invoiceDesingModel.tblScomeName" />
+          <AssociationSet Name="FK_tblBody_tblScomeName" Association="invoiceDesingModel.FK_tblBody_tblScomeName">
+            <End Role="tblScomeName" EntitySet="tblScomeName" />
+            <End Role="tblBody" EntitySet="tblBody" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblHeader_tblScomeName" Association="invoiceDesingModel.FK_tblHeader_tblScomeName">
+            <End Role="tblScomeName" EntitySet="tblScomeName" />
+            <End Role="tblHeader" EntitySet="tblHeader" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="tblScomeName">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblBody" Relationship="invoiceDesingModel.FK_tblBody_tblScomeName" FromRole="tblScomeName" ToRole="tblBody" />
+          <NavigationProperty Name="tblHeader" Relationship="invoiceDesingModel.FK_tblHeader_tblScomeName" FromRole="tblScomeName" ToRole="tblHeader" />
+        </EntityType>
+        <Association Name="FK_tblBody_tblScomeName">
+          <End Type="invoiceDesingModel.tblScomeName" Role="tblScomeName" Multiplicity="1" />
+          <End Type="invoiceDesingModel.tblBody" Role="tblBody" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblScomeName">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="tblBody">
+              <PropertyRef Name="ScomeNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblHeader_tblScomeName">
+          <End Type="invoiceDesingModel.tblScomeName" Role="tblScomeName" Multiplicity="1" />
+          <End Type="invoiceDesingModel.tblHeader" Role="tblHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblScomeName">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="tblHeader">
+              <PropertyRef Name="ScomeNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="invoiceDesingModelStoreContainer" CdmEntityContainer="DataModel">
+          <EntitySetMapping Name="tblBody">
+            <EntityTypeMapping TypeName="invoiceDesingModel.tblBody">
+              <MappingFragment StoreEntitySet="tblBody">
+                <ScalarProperty Name="ScomeNo" ColumnName="ScomeNo" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Left" ColumnName="Left" />
+                <ScalarProperty Name="Top" ColumnName="Top" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblHeader">
+            <EntityTypeMapping TypeName="invoiceDesingModel.tblHeader">
+              <MappingFragment StoreEntitySet="tblHeader">
+                <ScalarProperty Name="ScomeNo" ColumnName="ScomeNo" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Left" ColumnName="Left" />
+                <ScalarProperty Name="Top" ColumnName="Top" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblScomeName">
+            <EntityTypeMapping TypeName="invoiceDesingModel.tblScomeName">
+              <MappingFragment StoreEntitySet="tblScomeName">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="No" ColumnName="No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
