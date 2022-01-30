@@ -22,9 +22,24 @@ namespace writeInvoice
             DataModel dm = new DataModel();
 
             var scope = dm.tblScomeName.ToList();
-            int lblX = 22;
+            int lblX = 32;
             int lblY = 61;
+            int chkX = 12;
+            int chkY = 61;
+            int nmHeadLeftX = 294;
+            int nmHeadLeftY = 61;
+            int nmHeadTopX = 456;
+            int nmHeadTopY = 61;
+            int nmBodyLeftX = 574;
+            int nmBodyLeftY = 61;
+            int nmBodyTopX = 739;
+            int nmBodyTopY = 61;
             Label[] lbl = new Label[scope.Count];
+            CheckBox[] chk = new CheckBox[scope.Count];
+            NumericUpDown[] nmHeadLeft = new NumericUpDown[scope.Count];
+            NumericUpDown[] nmHeadTop = new NumericUpDown[scope.Count];
+            NumericUpDown[] nmBodyLeft = new NumericUpDown[scope.Count];
+            NumericUpDown[] nmBodyTop = new NumericUpDown[scope.Count];
             int i = 0;
             foreach (var item in scope)
             { 
@@ -36,7 +51,52 @@ namespace writeInvoice
                 this.Controls.Add(lbl[i]);
                 lblY += 27;
             }
-
+            foreach (var item in scope)
+            {
+                chk[i] = new CheckBox();
+                chk[i].AutoSize = true;
+                chk[i].Text = "";
+                chk[i].Location = new Point(chkX, chkY);
+                chk[i].Name =  item.No.ToString();
+                this.Controls.Add(chk[i]);
+                chkY += 27;
+            }
+            foreach (var item in scope)
+            {
+                nmHeadLeft[i] = new NumericUpDown();
+                nmHeadLeft[i].Size = new Size(65,18);
+                nmHeadLeft[i].Location = new Point(nmHeadLeftX, nmHeadLeftY);
+                nmHeadLeft[i].Name = "nmHeadLeft" + item.No.ToString();
+                this.Controls.Add(nmHeadLeft[i]);
+                nmHeadLeftY += 27;
+            }
+            foreach (var item in scope)
+            {
+                nmHeadTop[i] = new NumericUpDown();
+                nmHeadTop[i].Size = new Size(65, 18);
+                nmHeadTop[i].Location = new Point(nmHeadTopX, nmHeadTopY);
+                nmHeadTop[i].Name = "nmHeadTop" + item.No.ToString();
+                this.Controls.Add(nmHeadTop[i]);
+                nmHeadTopY += 27;
+            }
+            foreach (var item in scope)
+            {
+                nmBodyLeft[i] = new NumericUpDown();
+                nmBodyLeft[i].Size = new Size(65, 18);
+                nmBodyLeft[i].Location = new Point(nmBodyLeftX, nmBodyLeftY);
+                nmBodyLeft[i].Name = "nmBodyLeft" + item.No.ToString();
+                this.Controls.Add(nmBodyLeft[i]);
+                nmBodyLeftY += 27;
+            }
+            foreach (var item in scope)
+            {
+                nmBodyTop[i] = new NumericUpDown();
+                nmBodyTop[i].Size = new Size(65, 18);
+                nmBodyTop[i].Location = new Point(nmBodyTopX, nmBodyTopY);
+                nmBodyTop[i].Name = "nmBodyTop" + item.No.ToString();
+                this.Controls.Add(nmBodyTop[i]);
+                nmBodyTopY += 27;
+            }
         }
     }
 }

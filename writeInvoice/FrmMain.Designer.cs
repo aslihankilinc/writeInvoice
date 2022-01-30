@@ -164,7 +164,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Name = "FrmMain";
-            this.Text = "FrmMain";
+            this.Text = "Desing";
             this.ResumeLayout(false);
             this.PerformLayout();
 
