@@ -15,9 +15,9 @@ namespace writeInvoice
     public partial class tblBody
     {
         public short No { get; set; }
+        public short ScomeNo { get; set; }
         public decimal Left { get; set; }
         public decimal Top { get; set; }
-        public short ScomeNo { get; set; }
     
         public virtual tblScomeName tblScomeName { get; set; }
     }

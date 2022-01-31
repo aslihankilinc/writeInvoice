@@ -12,13 +12,17 @@ namespace writeInvoice
     using System;
     using System.Collections.Generic;
     
-    public partial class tblHeader
+    public partial class tblCeki
     {
-        public short No { get; set; }
-        public short ScomeNo { get; set; }
-        public decimal Left { get; set; }
-        public decimal Top { get; set; }
+        public int No { get; set; }
+        public short AracNo { get; set; }
+        public short Palet { get; set; }
+        public Nullable<decimal> Net { get; set; }
+        public Nullable<decimal> Brut { get; set; }
+        public Nullable<decimal> AracNet { get; set; }
+        public Nullable<System.DateTime> GirisTarih { get; set; }
+        public Nullable<System.DateTime> CikisTarih { get; set; }
     
-        public virtual tblScomeName tblScomeName { get; set; }
+        public virtual tblDriver tblDriver { get; set; }
     }
 }
