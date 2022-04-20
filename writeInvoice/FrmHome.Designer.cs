@@ -30,6 +30,8 @@
         {
             this.btnDesing = new System.Windows.Forms.Button();
             this.btnPreview = new System.Windows.Forms.Button();
+            this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.SuspendLayout();
             // 
             // btnDesing
@@ -54,6 +56,11 @@
             this.btnPreview.TabIndex = 1;
             this.btnPreview.Text = "Preview";
             this.btnPreview.UseVisualStyleBackColor = false;
+            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
+            // 
+            // printDialog1
+            // 
+            this.printDialog1.UseEXDialog = true;
             // 
             // FrmHome
             // 
@@ -72,5 +79,7 @@
 
         private System.Windows.Forms.Button btnDesing;
         private System.Windows.Forms.Button btnPreview;
+        private System.Windows.Forms.PrintDialog printDialog1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }
