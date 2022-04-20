@@ -30,5 +30,6 @@ namespace writeInvoice
         public virtual DbSet<tblDriver> tblDriver { get; set; }
         public virtual DbSet<tblHeader> tblHeader { get; set; }
         public virtual DbSet<tblScomeName> tblScomeName { get; set; }
+        public virtual DbSet<tblDocument> tblDocument { get; set; }
     }
 }

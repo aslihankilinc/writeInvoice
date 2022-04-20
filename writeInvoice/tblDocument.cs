@@ -12,23 +12,18 @@ namespace writeInvoice
     using System;
     using System.Collections.Generic;
     
-    public partial class tblScomeName
+    public partial class tblDocument
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblScomeName()
+        public tblDocument()
         {
-            this.tblBody = new HashSet<tblBody>();
-            this.tblHeader = new HashSet<tblHeader>();
+            this.tblScomeName = new HashSet<tblScomeName>();
         }
     
         public short No { get; set; }
         public string Name { get; set; }
-        public Nullable<short> DocumentNo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblBody> tblBody { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblHeader> tblHeader { get; set; }
-        public virtual tblDocument tblDocument { get; set; }
+        public virtual ICollection<tblScomeName> tblScomeName { get; set; }
     }
 }

@@ -27,6 +27,13 @@
           <Property Name="GirisTarih" Type="datetime" />
           <Property Name="CikisTarih" Type="datetime" />
         </EntityType>
+        <EntityType Name="tblDocument">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="tblDriver">
           <Key>
             <PropertyRef Name="No" />
@@ -52,6 +59,7 @@
           </Key>
           <Property Name="No" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DocumentNo" Type="smallint" />
         </EntityType>
         <Association Name="FK_tblBody_tblScomeName">
           <End Role="tblScomeName" Type="Self.tblScomeName" Multiplicity="1" />
@@ -89,9 +97,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblScomeName_tblDocument">
+          <End Role="tblDocument" Type="Self.tblDocument" Multiplicity="0..1" />
+          <End Role="tblScomeName" Type="Self.tblScomeName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDocument">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="tblScomeName">
+              <PropertyRef Name="DocumentNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="invoiceDesingModelStoreContainer">
           <EntitySet Name="tblBody" EntityType="Self.tblBody" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCeki" EntityType="Self.tblCeki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDocument" EntityType="Self.tblDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDriver" EntityType="Self.tblDriver" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeader" EntityType="Self.tblHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblScomeName" EntityType="Self.tblScomeName" Schema="dbo" store:Type="Tables" />
@@ -107,39 +128,24 @@
             <End Role="tblScomeName" EntitySet="tblScomeName" />
             <End Role="tblHeader" EntitySet="tblHeader" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblScomeName_tblDocument" Association="Self.FK_tblScomeName_tblDocument">
+            <End Role="tblDocument" EntitySet="tblDocument" />
+            <End Role="tblScomeName" EntitySet="tblScomeName" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="invoiceDesingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="DataModel" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tblBody" EntityType="invoiceDesingModel.tblBody" />
-          <EntitySet Name="tblCeki" EntityType="invoiceDesingModel.tblCeki" />
-          <EntitySet Name="tblDriver" EntityType="invoiceDesingModel.tblDriver" />
-          <EntitySet Name="tblHeader" EntityType="invoiceDesingModel.tblHeader" />
-          <EntitySet Name="tblScomeName" EntityType="invoiceDesingModel.tblScomeName" />
-          <AssociationSet Name="FK_tblBody_tblScomeName" Association="invoiceDesingModel.FK_tblBody_tblScomeName">
-            <End Role="tblScomeName" EntitySet="tblScomeName" />
-            <End Role="tblBody" EntitySet="tblBody" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblCeki_tblDriver" Association="invoiceDesingModel.FK_tblCeki_tblDriver">
-            <End Role="tblDriver" EntitySet="tblDriver" />
-            <End Role="tblCeki" EntitySet="tblCeki" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblHeader_tblScomeName" Association="invoiceDesingModel.FK_tblHeader_tblScomeName">
-            <End Role="tblScomeName" EntitySet="tblScomeName" />
-            <End Role="tblHeader" EntitySet="tblHeader" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="tblBody">
           <Key>
             <PropertyRef Name="No" />
           </Key>
           <Property Name="No" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ScomeNo" Type="Int16" Nullable="false" />
-          <Property Name="Left" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="Top" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <NavigationProperty Name="tblScomeName" Relationship="invoiceDesingModel.FK_tblBody_tblScomeName" FromRole="tblBody" ToRole="tblScomeName" />
+          <Property Name="Left" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Top" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <NavigationProperty Name="tblScomeName" Relationship="Self.FK_tblBody_tblScomeName" FromRole="tblBody" ToRole="tblScomeName" />
         </EntityType>
         <EntityType Name="tblCeki">
           <Key>
@@ -153,7 +159,7 @@
           <Property Name="AracNet" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="GirisTarih" Type="DateTime" Precision="3" />
           <Property Name="CikisTarih" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblDriver" Relationship="invoiceDesingModel.FK_tblCeki_tblDriver" FromRole="tblCeki" ToRole="tblDriver" />
+          <NavigationProperty Name="tblDriver" Relationship="Self.FK_tblCeki_tblDriver" FromRole="tblCeki" ToRole="tblDriver" />
         </EntityType>
         <EntityType Name="tblDriver">
           <Key>
@@ -164,7 +170,7 @@
           <Property Name="TC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Plaka1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Plaka2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tblCeki" Relationship="invoiceDesingModel.FK_tblCeki_tblDriver" FromRole="tblDriver" ToRole="tblCeki" />
+          <NavigationProperty Name="tblCeki" Relationship="Self.FK_tblCeki_tblDriver" FromRole="tblDriver" ToRole="tblCeki" />
         </EntityType>
         <EntityType Name="tblHeader">
           <Key>
@@ -172,22 +178,24 @@
           </Key>
           <Property Name="No" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ScomeNo" Type="Int16" Nullable="false" />
-          <Property Name="Left" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="Top" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <NavigationProperty Name="tblScomeName" Relationship="invoiceDesingModel.FK_tblHeader_tblScomeName" FromRole="tblHeader" ToRole="tblScomeName" />
+          <Property Name="Left" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Top" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <NavigationProperty Name="tblScomeName" Relationship="Self.FK_tblHeader_tblScomeName" FromRole="tblHeader" ToRole="tblScomeName" />
         </EntityType>
         <EntityType Name="tblScomeName">
           <Key>
             <PropertyRef Name="No" />
           </Key>
           <Property Name="No" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tblBody" Relationship="invoiceDesingModel.FK_tblBody_tblScomeName" FromRole="tblScomeName" ToRole="tblBody" />
-          <NavigationProperty Name="tblHeader" Relationship="invoiceDesingModel.FK_tblHeader_tblScomeName" FromRole="tblScomeName" ToRole="tblHeader" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblBody" Relationship="Self.FK_tblBody_tblScomeName" FromRole="tblScomeName" ToRole="tblBody" />
+          <NavigationProperty Name="tblHeader" Relationship="Self.FK_tblHeader_tblScomeName" FromRole="tblScomeName" ToRole="tblHeader" />
+          <Property Name="DocumentNo" Type="Int16" />
+          <NavigationProperty Name="tblDocument" Relationship="invoiceDesingModel.FK_tblScomeName_tblDocument" FromRole="tblScomeName" ToRole="tblDocument" />
         </EntityType>
         <Association Name="FK_tblBody_tblScomeName">
-          <End Type="invoiceDesingModel.tblScomeName" Role="tblScomeName" Multiplicity="1" />
-          <End Type="invoiceDesingModel.tblBody" Role="tblBody" Multiplicity="*" />
+          <End Role="tblScomeName" Type="Self.tblScomeName" Multiplicity="1" />
+          <End Role="tblBody" Type="Self.tblBody" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblScomeName">
               <PropertyRef Name="No" />
@@ -198,8 +206,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblCeki_tblDriver">
-          <End Type="invoiceDesingModel.tblDriver" Role="tblDriver" Multiplicity="1" />
-          <End Type="invoiceDesingModel.tblCeki" Role="tblCeki" Multiplicity="*" />
+          <End Role="tblDriver" Type="Self.tblDriver" Multiplicity="1" />
+          <End Role="tblCeki" Type="Self.tblCeki" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblDriver">
               <PropertyRef Name="No" />
@@ -210,8 +218,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tblHeader_tblScomeName">
-          <End Type="invoiceDesingModel.tblScomeName" Role="tblScomeName" Multiplicity="1" />
-          <End Type="invoiceDesingModel.tblHeader" Role="tblHeader" Multiplicity="*" />
+          <End Role="tblScomeName" Type="Self.tblScomeName" Multiplicity="1" />
+          <End Role="tblHeader" Type="Self.tblHeader" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblScomeName">
               <PropertyRef Name="No" />
@@ -221,7 +229,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+        <EntityContainer Name="DataModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblBody" EntityType="Self.tblBody" />
+          <EntitySet Name="tblCeki" EntityType="Self.tblCeki" />
+          <EntitySet Name="tblDriver" EntityType="Self.tblDriver" />
+          <EntitySet Name="tblHeader" EntityType="Self.tblHeader" />
+          <EntitySet Name="tblScomeName" EntityType="Self.tblScomeName" />
+          <AssociationSet Name="FK_tblBody_tblScomeName" Association="Self.FK_tblBody_tblScomeName">
+            <End Role="tblScomeName" EntitySet="tblScomeName" />
+            <End Role="tblBody" EntitySet="tblBody" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCeki_tblDriver" Association="Self.FK_tblCeki_tblDriver">
+            <End Role="tblDriver" EntitySet="tblDriver" />
+            <End Role="tblCeki" EntitySet="tblCeki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblHeader_tblScomeName" Association="Self.FK_tblHeader_tblScomeName">
+            <End Role="tblScomeName" EntitySet="tblScomeName" />
+            <End Role="tblHeader" EntitySet="tblHeader" />
+          </AssociationSet>
+          <EntitySet Name="tblDocument" EntityType="invoiceDesingModel.tblDocument" />
+          <AssociationSet Name="FK_tblScomeName_tblDocument" Association="invoiceDesingModel.FK_tblScomeName_tblDocument">
+            <End Role="tblDocument" EntitySet="tblDocument" />
+            <End Role="tblScomeName" EntitySet="tblScomeName" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblDocument">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblScomeName" Relationship="invoiceDesingModel.FK_tblScomeName_tblDocument" FromRole="tblDocument" ToRole="tblScomeName" />
+        </EntityType>
+        <Association Name="FK_tblScomeName_tblDocument">
+          <End Type="invoiceDesingModel.tblDocument" Role="tblDocument" Multiplicity="0..1" />
+          <End Type="invoiceDesingModel.tblScomeName" Role="tblScomeName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDocument">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="tblScomeName">
+              <PropertyRef Name="DocumentNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -230,51 +282,60 @@
           <EntitySetMapping Name="tblBody">
             <EntityTypeMapping TypeName="invoiceDesingModel.tblBody">
               <MappingFragment StoreEntitySet="tblBody">
-                <ScalarProperty Name="Top" ColumnName="Top" />
-                <ScalarProperty Name="Left" ColumnName="Left" />
-                <ScalarProperty Name="ScomeNo" ColumnName="ScomeNo" />
                 <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="ScomeNo" ColumnName="ScomeNo" />
+                <ScalarProperty Name="Left" ColumnName="Left" />
+                <ScalarProperty Name="Top" ColumnName="Top" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblCeki">
             <EntityTypeMapping TypeName="invoiceDesingModel.tblCeki">
               <MappingFragment StoreEntitySet="tblCeki">
-                <ScalarProperty Name="CikisTarih" ColumnName="CikisTarih" />
-                <ScalarProperty Name="GirisTarih" ColumnName="GirisTarih" />
-                <ScalarProperty Name="AracNet" ColumnName="AracNet" />
-                <ScalarProperty Name="Brut" ColumnName="Brut" />
-                <ScalarProperty Name="Net" ColumnName="Net" />
-                <ScalarProperty Name="Palet" ColumnName="Palet" />
-                <ScalarProperty Name="AracNo" ColumnName="AracNo" />
                 <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="AracNo" ColumnName="AracNo" />
+                <ScalarProperty Name="Palet" ColumnName="Palet" />
+                <ScalarProperty Name="Net" ColumnName="Net" />
+                <ScalarProperty Name="Brut" ColumnName="Brut" />
+                <ScalarProperty Name="AracNet" ColumnName="AracNet" />
+                <ScalarProperty Name="GirisTarih" ColumnName="GirisTarih" />
+                <ScalarProperty Name="CikisTarih" ColumnName="CikisTarih" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblDriver">
             <EntityTypeMapping TypeName="invoiceDesingModel.tblDriver">
               <MappingFragment StoreEntitySet="tblDriver">
-                <ScalarProperty Name="Plaka2" ColumnName="Plaka2" />
-                <ScalarProperty Name="Plaka1" ColumnName="Plaka1" />
-                <ScalarProperty Name="TC" ColumnName="TC" />
-                <ScalarProperty Name="Driver" ColumnName="Driver" />
                 <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Driver" ColumnName="Driver" />
+                <ScalarProperty Name="TC" ColumnName="TC" />
+                <ScalarProperty Name="Plaka1" ColumnName="Plaka1" />
+                <ScalarProperty Name="Plaka2" ColumnName="Plaka2" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblHeader">
             <EntityTypeMapping TypeName="invoiceDesingModel.tblHeader">
               <MappingFragment StoreEntitySet="tblHeader">
-                <ScalarProperty Name="Top" ColumnName="Top" />
-                <ScalarProperty Name="Left" ColumnName="Left" />
-                <ScalarProperty Name="ScomeNo" ColumnName="ScomeNo" />
                 <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="ScomeNo" ColumnName="ScomeNo" />
+                <ScalarProperty Name="Left" ColumnName="Left" />
+                <ScalarProperty Name="Top" ColumnName="Top" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblScomeName">
             <EntityTypeMapping TypeName="invoiceDesingModel.tblScomeName">
               <MappingFragment StoreEntitySet="tblScomeName">
+                <ScalarProperty Name="DocumentNo" ColumnName="DocumentNo" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDocument">
+            <EntityTypeMapping TypeName="invoiceDesingModel.tblDocument">
+              <MappingFragment StoreEntitySet="tblDocument">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="No" ColumnName="No" />
               </MappingFragment>
