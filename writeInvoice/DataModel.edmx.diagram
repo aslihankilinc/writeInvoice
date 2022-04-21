@@ -5,16 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="37c77801cb624f32befd1dccf5a8f894" Name="Diagram1">
-        <EntityTypeShape EntityType="invoiceDesingModel.tblBody" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="invoiceDesingModel.tblCeki" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="invoiceDesingModel.tblDriver" Width="1.5" PointX="5.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="invoiceDesingModel.tblHeader" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="invoiceDesingModel.tblScomeName" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <AssociationConnector Association="invoiceDesingModel.FK_tblBody_tblScomeName" ManuallyRouted="false" />
-        <AssociationConnector Association="invoiceDesingModel.FK_tblCeki_tblDriver" ManuallyRouted="false" />
-        <AssociationConnector Association="invoiceDesingModel.FK_tblHeader_tblScomeName" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="invoiceDesingModel.tblDocument" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="invoiceDesingModel.tblBody" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="invoiceDesingModel.tblCeki" Width="1.5" PointX="3" PointY="7" />
+        <EntityTypeShape EntityType="invoiceDesingModel.tblDocument" Width="1.5" PointX="0.75" PointY="2.375" />
+        <EntityTypeShape EntityType="invoiceDesingModel.tblDriver" Width="1.5" PointX="0.75" PointY="7.25" />
+        <EntityTypeShape EntityType="invoiceDesingModel.tblHeader" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="invoiceDesingModel.tblScomeName" Width="1.5" PointX="3" PointY="2.375" />
+        <AssociationConnector Association="invoiceDesingModel.FK_tblBody_tblScomeName" />
+        <AssociationConnector Association="invoiceDesingModel.FK_tblCeki_tblDriver" />
         <AssociationConnector Association="invoiceDesingModel.FK_tblScomeName_tblDocument" />
+        <AssociationConnector Association="invoiceDesingModel.FK_tblHeader_tblScomeName" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -27,8 +27,8 @@ namespace writeInvoice
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblBody> tblBody { get; set; }
+        public virtual tblDocument tblDocument { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblHeader> tblHeader { get; set; }
-        public virtual tblDocument tblDocument { get; set; }
     }
 }

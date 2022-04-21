@@ -22,6 +22,9 @@ namespace writeInvoice
     
         public short No { get; set; }
         public string Name { get; set; }
+        public string FontFamily { get; set; }
+        public Nullable<short> FontSize { get; set; }
+        public string Head { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblScomeName> tblScomeName { get; set; }

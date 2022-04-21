@@ -41,10 +41,10 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.nmFontSize = new System.Windows.Forms.NumericUpDown();
             this.cmbFontFamily = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmFontSize)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -185,18 +185,18 @@
             this.label11.TabIndex = 18;
             this.label11.Text = "Font Size        :";
             // 
-            // numericUpDown1
+            // nmFontSize
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(172, 49);
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.nmFontSize.Location = new System.Drawing.Point(172, 49);
+            this.nmFontSize.Minimum = new decimal(new int[] {
             5,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 20;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.nmFontSize.Name = "nmFontSize";
+            this.nmFontSize.Size = new System.Drawing.Size(120, 20);
+            this.nmFontSize.TabIndex = 20;
+            this.nmFontSize.Value = new decimal(new int[] {
             12,
             0,
             0,
@@ -229,7 +229,7 @@
             this.ClientSize = new System.Drawing.Size(884, 825);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cmbFontFamily);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.nmFontSize);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
@@ -245,7 +245,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FrmMain";
             this.Text = "Desing";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmFontSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,7 +266,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown nmFontSize;
         private System.Windows.Forms.ComboBox cmbFontFamily;
         private System.Windows.Forms.Label label7;
     }

@@ -57,6 +57,30 @@ namespace writeInvoice
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
+            DataModel dm = new DataModel();
+            var doc = dm.tblDocument.Where(w => w.No == documentNo).FirstOrDefault();
+            
+
+            System.Drawing.Font font = new System.Drawing.Font((doc.FontFamily==null?"Times New Roman": doc.FontFamily.ToString()), Convert.ToInt32(doc.FontSize));
+            SolidBrush sb = new SolidBrush(System.Drawing.Color.Black);
+            Pen pen = new Pen(System.Drawing.Color.Black);
+            if (doc.No == 1)
+            {
+                startPage = Convert.ToInt32(nmStartNo.Value);
+                var writeLst = dm.tblCeki.Where(w => w.No >= startPage).ToList();
+                foreach (var item in writeLst)
+                {
+
+                    StringFormat sf = new StringFormat();
+                    sf.LineAlignment = StringAlignment.Center;
+                    sf.Alignment = StringAlignment.Far;
+                    e.Graphics.DrawString(doc.Head, font, sb, ClientRectangle, sf);
+                    e.HasMorePages = true;
+                }
+                e.HasMorePages = false;
+
+            }
+
 
         }
 

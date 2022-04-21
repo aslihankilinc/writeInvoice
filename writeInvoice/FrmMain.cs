@@ -117,7 +117,11 @@ namespace writeInvoice
         private void btnSave_Click(object sender, EventArgs e)
         {
             DataModel dm = new DataModel();
-            var scopeLst = dm.tblScomeName.ToList();
+            var scopeLst = dm.tblScomeName.Where(w=>w.DocumentNo==documentNo).ToList();
+            var doc = dm.tblDocument.Where(w => w.No == documentNo).FirstOrDefault();
+            doc.FontFamily = cmbFontFamily.Text;
+            doc.FontSize = Convert.ToInt16(nmFontSize.Value);
+            dm.SaveChanges();
             foreach (var item in scopeLst)
             {
                 tblBody body = new tblBody();
