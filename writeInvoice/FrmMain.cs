@@ -59,7 +59,7 @@ namespace writeInvoice
         {
             DataModel dm = new DataModel();
 
-            var scope = dm.tblScomeName.Where(w => w.DocumentNo == documentNo).ToList();
+            var scope = dm.tblScomeName.Where(w => w.DocumentNo == documentNo).OrderBy(O=>O.Order).ToList();
             int lblX = 32;
             int lblY = 5;
             int chkX = 12;
@@ -105,6 +105,7 @@ namespace writeInvoice
                 nmHeadLeft[i].Size = new Size(65, 18);
                 nmHeadLeft[i].Location = new Point(nmHeadLeftX, nmHeadLeftY);
                 nmHeadLeft[i].Name = "nmHeadLeft" + item.No.ToString();
+                nmHeadLeft[i].Maximum = 2000;
                 panel1.Controls.Add(nmHeadLeft[i]);
                 nmHeadLeftY += 27;
             }
@@ -114,6 +115,7 @@ namespace writeInvoice
                 nmHeadTop[i].Size = new Size(65, 18);
                 nmHeadTop[i].Location = new Point(nmHeadTopX, nmHeadTopY);
                 nmHeadTop[i].Name = "nmHeadTop" + item.No.ToString();
+                nmHeadTop[i].Maximum = 2000;
                 panel1.Controls.Add(nmHeadTop[i]);
                 nmHeadTopY += 27;
             }
@@ -123,6 +125,7 @@ namespace writeInvoice
                 nmBodyLeft[i].Size = new Size(65, 18);
                 nmBodyLeft[i].Location = new Point(nmBodyLeftX, nmBodyLeftY);
                 nmBodyLeft[i].Name = "nmBodyLeft" + item.No.ToString();
+                nmBodyLeft[i].Maximum = 2000;
                 panel1.Controls.Add(nmBodyLeft[i]);
                 nmBodyLeftY += 27;
             }
@@ -132,6 +135,7 @@ namespace writeInvoice
                 nmBodyTop[i].Size = new Size(65, 18);
                 nmBodyTop[i].Location = new Point(nmBodyTopX, nmBodyTopY);
                 nmBodyTop[i].Name = "nmBodyTop" + item.No.ToString();
+                nmBodyTop[i].Maximum = 2000;
                 panel1.Controls.Add(nmBodyTop[i]);
                 nmBodyTopY += 27;
             }
@@ -149,12 +153,12 @@ namespace writeInvoice
             {
                 tblBody body = new tblBody();
                 tblHeader head = new tblHeader();
-                if (((CheckBox)(Controls[item.No.ToString()])).Checked)
+                if (((CheckBox)(panel1.Controls[item.No.ToString()])).Checked)
                 {
-                    body.Left = ((NumericUpDown)this.Controls.Find("nmBodyLeft" + item.No.ToString(), true)[0]).Value;
-                    body.Top = ((NumericUpDown)this.Controls.Find("nmBodyTop" + item.No.ToString(), true)[0]).Value;
-                    head.Left = ((NumericUpDown)this.Controls.Find("nmHeadLeft" + item.No.ToString(), true)[0]).Value;
-                    head.Top = ((NumericUpDown)this.Controls.Find("nmHeadTop" + item.No.ToString(), true)[0]).Value;
+                    body.Left = ((NumericUpDown)panel1.Controls.Find("nmBodyLeft" + item.No.ToString(), true)[0]).Value;
+                    body.Top = ((NumericUpDown)panel1.Controls.Find("nmBodyTop" + item.No.ToString(), true)[0]).Value;
+                    head.Left = ((NumericUpDown)panel1.Controls.Find("nmHeadLeft" + item.No.ToString(), true)[0]).Value;
+                    head.Top = ((NumericUpDown)panel1.Controls.Find("nmHeadTop" + item.No.ToString(), true)[0]).Value;
                     if (item.tblBody.Count==0)
                     {
                         body.ScomeNo = item.No;
