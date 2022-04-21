@@ -151,6 +151,7 @@ namespace writeInvoice
 
                     dm.SaveChanges();
 
+
                 }
             }
             MessageBox.Show("Başarılı");
