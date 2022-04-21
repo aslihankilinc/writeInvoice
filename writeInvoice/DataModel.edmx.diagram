@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="invoiceDesingModel.tblDocument" Width="1.5" PointX="0.75" PointY="2.375" />
         <EntityTypeShape EntityType="invoiceDesingModel.tblDriver" Width="1.5" PointX="0.75" PointY="7.25" />
         <EntityTypeShape EntityType="invoiceDesingModel.tblHeader" Width="1.5" PointX="5.25" PointY="3.75" />
-        <EntityTypeShape EntityType="invoiceDesingModel.tblScomeName" Width="1.5" PointX="3" PointY="2.375" />
+        <EntityTypeShape EntityType="invoiceDesingModel.tblScomeName" Width="1.5" PointX="3" PointY="2.125" />
         <AssociationConnector Association="invoiceDesingModel.FK_tblBody_tblScomeName" />
         <AssociationConnector Association="invoiceDesingModel.FK_tblCeki_tblDriver" />
         <AssociationConnector Association="invoiceDesingModel.FK_tblScomeName_tblDocument" />

@@ -37,7 +37,7 @@ namespace writeInvoice
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
-            printPreviewDialog1.Show();
+            printPreviewDialog1.ShowDialog();
         }
 
         private void btnProperties_Click(object sender, EventArgs e)
@@ -73,9 +73,24 @@ namespace writeInvoice
 
                     StringFormat sf = new StringFormat();
                     sf.LineAlignment = StringAlignment.Center;
-                    sf.Alignment = StringAlignment.Far;
-                    e.Graphics.DrawString(doc.Head, font, sb, ClientRectangle, sf);
+                    sf.Alignment = StringAlignment.Center;
+                    e.Graphics.DrawString(doc.Head, font, sb, ClientRectangle,sf);
                     e.HasMorePages = true;
+
+                    int headY = 0;
+                    foreach (var scome in doc.tblScomeName.OrderBy(o=>o.Order).ToList())
+                    {
+                        
+                        foreach (var head in scome.tblHeader.ToList())
+                        {
+                            if (head.Left != 0 && head.Top != 0)
+                            {
+                                
+                                e.Graphics.DrawString(scome.Description, font, sb, Convert.ToInt32(head.Left), Convert.ToInt32(head.Top+headY));
+                                headY += Convert.ToInt32(head.Top);
+                            }
+                        }
+                    }
                 }
                 e.HasMorePages = false;
 

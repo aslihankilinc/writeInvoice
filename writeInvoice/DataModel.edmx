@@ -63,6 +63,8 @@
           <Property Name="No" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DocumentNo" Type="smallint" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Order" Type="smallint" />
         </EntityType>
         <Association Name="FK_tblBody_tblScomeName">
           <End Role="tblScomeName" Type="Self.tblScomeName" Multiplicity="1" />
@@ -227,6 +229,8 @@
           <Property Name="No" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DocumentNo" Type="Int16" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Order" Type="Int16" />
           <NavigationProperty Name="tblBody" Relationship="invoiceDesingModel.FK_tblBody_tblScomeName" FromRole="tblScomeName" ToRole="tblBody" />
           <NavigationProperty Name="tblDocument" Relationship="invoiceDesingModel.FK_tblScomeName_tblDocument" FromRole="tblScomeName" ToRole="tblDocument" />
           <NavigationProperty Name="tblHeader" Relationship="invoiceDesingModel.FK_tblHeader_tblScomeName" FromRole="tblScomeName" ToRole="tblHeader" />
@@ -344,6 +348,8 @@
           <EntitySetMapping Name="tblScomeName">
             <EntityTypeMapping TypeName="invoiceDesingModel.tblScomeName">
               <MappingFragment StoreEntitySet="tblScomeName">
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="DocumentNo" ColumnName="DocumentNo" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="No" ColumnName="No" />

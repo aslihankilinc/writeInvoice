@@ -32,23 +32,46 @@ namespace writeInvoice
 
         }
 
+        public void DesingClear()
+        {
+            Label[] label= new Label[2];
+            label[0]= new Label();
+            label[0].AutoSize = true;
+            label[0].Location = new System.Drawing.Point(271, 9);
+            label[0].Name = "label7";
+            label[0].Size = new System.Drawing.Size(9, 598);
+            label[0].TabIndex = 32;
+            label[0].Text = "|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n" +
+             "|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n";
+            label[1] = new Label();
+            label[1].AutoSize = true;
+            label[1].Location = new System.Drawing.Point(559, 8);
+            label[1].Name = "label8";
+            label[1].Size = new System.Drawing.Size(9, 598);
+            label[1].TabIndex = 26;
+            label[1].Text = "|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n" +
+    "|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n";
+            panel1.Controls.Clear();
+            panel1.Controls.AddRange(label);
+
+        }
         public void Desing()
         {
             DataModel dm = new DataModel();
 
             var scope = dm.tblScomeName.Where(w => w.DocumentNo == documentNo).ToList();
             int lblX = 32;
-            int lblY = 200;
+            int lblY = 5;
             int chkX = 12;
-            int chkY = 200;
+            int chkY = 5;
             int nmHeadLeftX = 294;
-            int nmHeadLeftY = 200;
+            int nmHeadLeftY = 5;
             int nmHeadTopX = 456;
-            int nmHeadTopY = 200;
+            int nmHeadTopY = 5;
             int nmBodyLeftX = 574;
-            int nmBodyLeftY = 200;
+            int nmBodyLeftY = 5;
             int nmBodyTopX = 739;
-            int nmBodyTopY = 200;
+            int nmBodyTopY = 5;
             Label[] lbl = new Label[scope.Count];
             CheckBox[] chk = new CheckBox[scope.Count];
             NumericUpDown[] nmHeadLeft = new NumericUpDown[scope.Count];
@@ -63,7 +86,7 @@ namespace writeInvoice
                 lbl[i].Text = item.Name;
                 lbl[i].Location = new Point(lblX, lblY);
                 lbl[i].Name = "lbl" + item.Name;
-                this.Controls.Add(lbl[i]);
+                panel1.Controls.Add(lbl[i]);
                 lblY += 27;
             }
             foreach (var item in scope)
@@ -73,7 +96,7 @@ namespace writeInvoice
                 chk[i].Text = "";
                 chk[i].Location = new Point(chkX, chkY);
                 chk[i].Name = item.No.ToString();
-                this.Controls.Add(chk[i]);
+                panel1.Controls.Add(chk[i]);
                 chkY += 27;
             }
             foreach (var item in scope)
@@ -82,7 +105,7 @@ namespace writeInvoice
                 nmHeadLeft[i].Size = new Size(65, 18);
                 nmHeadLeft[i].Location = new Point(nmHeadLeftX, nmHeadLeftY);
                 nmHeadLeft[i].Name = "nmHeadLeft" + item.No.ToString();
-                this.Controls.Add(nmHeadLeft[i]);
+                panel1.Controls.Add(nmHeadLeft[i]);
                 nmHeadLeftY += 27;
             }
             foreach (var item in scope)
@@ -91,7 +114,7 @@ namespace writeInvoice
                 nmHeadTop[i].Size = new Size(65, 18);
                 nmHeadTop[i].Location = new Point(nmHeadTopX, nmHeadTopY);
                 nmHeadTop[i].Name = "nmHeadTop" + item.No.ToString();
-                this.Controls.Add(nmHeadTop[i]);
+                panel1.Controls.Add(nmHeadTop[i]);
                 nmHeadTopY += 27;
             }
             foreach (var item in scope)
@@ -100,7 +123,7 @@ namespace writeInvoice
                 nmBodyLeft[i].Size = new Size(65, 18);
                 nmBodyLeft[i].Location = new Point(nmBodyLeftX, nmBodyLeftY);
                 nmBodyLeft[i].Name = "nmBodyLeft" + item.No.ToString();
-                this.Controls.Add(nmBodyLeft[i]);
+                panel1.Controls.Add(nmBodyLeft[i]);
                 nmBodyLeftY += 27;
             }
             foreach (var item in scope)
@@ -109,7 +132,7 @@ namespace writeInvoice
                 nmBodyTop[i].Size = new Size(65, 18);
                 nmBodyTop[i].Location = new Point(nmBodyTopX, nmBodyTopY);
                 nmBodyTop[i].Name = "nmBodyTop" + item.No.ToString();
-                this.Controls.Add(nmBodyTop[i]);
+                panel1.Controls.Add(nmBodyTop[i]);
                 nmBodyTopY += 27;
             }
         }
@@ -169,7 +192,12 @@ namespace writeInvoice
 
         private void cmbScome_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (documentNo != Convert.ToInt32(((tblDocument)cmbScome.SelectedItem).No))
+            {
+                DesingClear();
+            }
             documentNo = Convert.ToInt32(((tblDocument)cmbScome.SelectedItem).No);
+          
             Desing();
         }
     }

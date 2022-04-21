@@ -24,6 +24,8 @@ namespace writeInvoice
         public short No { get; set; }
         public string Name { get; set; }
         public Nullable<short> DocumentNo { get; set; }
+        public string Description { get; set; }
+        public Nullable<short> Order { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblBody> tblBody { get; set; }
