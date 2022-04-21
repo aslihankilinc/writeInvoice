@@ -16,9 +16,17 @@ namespace writeInvoice
 {
     public partial class FrmHome : Form
     {
+        public static int documentNo;
+        public static int startPage;
         public FrmHome()
         {
             InitializeComponent();
+
+            DataModel dm = new DataModel();
+            documentNo = dm.tblDocument.FirstOrDefault().No;
+            cmbScome.DataSource = dm.tblDocument.ToList();
+            cmbScome.DisplayMember = "Name";
+            cmbScome.ValueMember = "No";
         }
 
         private void btnDesing_Click(object sender, EventArgs e)
@@ -29,14 +37,32 @@ namespace writeInvoice
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
-            DialogResult write;
-            write = printDialog1.ShowDialog();
-            if (write == DialogResult.OK)
+            printPreviewDialog1.Show();
+        }
+
+        private void btnProperties_Click(object sender, EventArgs e)
+        {
+            pageSetupDialog1.ShowDialog();
+        }
+
+        private void btnWrite_Click(object sender, EventArgs e)
+        {
+            startPage=Convert.ToInt32(nmStartNo.Value);
+            DialogResult p = printDialog1.ShowDialog();
+            if (p == DialogResult.OK)
             {
-              //  printDocument1.
+                printDocument1.Print();
             }
         }
 
-  
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+
+        }
+
+        private void cmbScome_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            documentNo = Convert.ToInt32(((tblDocument)cmbScome.SelectedItem).No);
+        }
     }
 }

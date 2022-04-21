@@ -14,15 +14,20 @@ namespace writeInvoice
     {
 
         public static int documentNo;
+        public static string fontFamily;
         public FrmMain()
         {
             InitializeComponent();
-
+            int i = 0;
             DataModel dm = new DataModel();
             documentNo = dm.tblDocument.FirstOrDefault().No;
             cmbScome.DataSource = dm.tblDocument.ToList();
             cmbScome.DisplayMember = "Name";
             cmbScome.ValueMember = "No";
+            fontFamily = FontFamily.Families.FirstOrDefault().Name;
+            cmbFontFamily.DataSource = FontFamily.Families.Select(s => new { Name = s.Name, No = i++ }).ToList();
+            cmbFontFamily.DisplayMember = "Name";
+            cmbFontFamily.ValueMember = "No";
             Desing();
 
         }
@@ -33,17 +38,17 @@ namespace writeInvoice
 
             var scope = dm.tblScomeName.Where(w => w.DocumentNo == documentNo).ToList();
             int lblX = 32;
-            int lblY = 110;
+            int lblY = 200;
             int chkX = 12;
-            int chkY = 110;
+            int chkY = 200;
             int nmHeadLeftX = 294;
-            int nmHeadLeftY = 110;
+            int nmHeadLeftY = 200;
             int nmHeadTopX = 456;
-            int nmHeadTopY = 110;
+            int nmHeadTopY = 200;
             int nmBodyLeftX = 574;
-            int nmBodyLeftY = 110;
+            int nmBodyLeftY = 200;
             int nmBodyTopX = 739;
-            int nmBodyTopY = 110;
+            int nmBodyTopY = 200;
             Label[] lbl = new Label[scope.Count];
             CheckBox[] chk = new CheckBox[scope.Count];
             NumericUpDown[] nmHeadLeft = new NumericUpDown[scope.Count];
