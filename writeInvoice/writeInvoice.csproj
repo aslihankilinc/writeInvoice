@@ -170,6 +170,7 @@
     <Content Include="img\1.png" />
     <Content Include="img\2.png" />
     <Content Include="img\3.png" />
+    <Content Include="script.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
